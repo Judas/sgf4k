@@ -5,9 +5,6 @@ It also includes an itnerpreter to get the goban state at each node of the parse
 
 This project is heavily inspired by the [SGF4J](https://github.com/toomasr/sgf4j) library.
 
-## Download
-
-
 ## Usage
 
 Parse your SGF string using:
