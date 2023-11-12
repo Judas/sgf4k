@@ -42,7 +42,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/Judas/sgf4k")
             credentials {
-                username = "Judas"
+                username = System.getenv("GITHUB_ACTOR")
                 password = System.getenv("GITHUB_TOKEN")
             }
         }

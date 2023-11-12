@@ -1,13 +1,12 @@
 name: Publish to GitHub Packages
 on:
-  release:
-    types: [ created ]
+  push:
+    branches:
+      - master
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+
     steps:
       - name: git checkout
         uses: actions/checkout@v4
@@ -25,8 +24,5 @@ jobs:
       - name: gradle setup
         uses: gradle/gradle-build-action@v2
 
-      - name: publish
-        run: ./gradlew publishSgf4kPublicationToGitHubPackagesRepository
-        env:
-          GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB_PACKAGES }}
+      - name: test
+        run: ./gradlew :test --tests "com.judas.sgf4k.*"
