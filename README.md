@@ -12,16 +12,14 @@ Parse your SGF string using:
 ```
 import com.judas.sgf4k.toGameCollection
 
-val coolection = "(;FF[4]GM[1]SZ[19];B[ab];W[cd])".toGameCollection()
+val collection = "(;FF[4]GM[1]SZ[19];B[ab];W[cd])".toGameCollection()
 ```
 
 Get goban state using the interpreter:
 
 ```
-import com.judas.sgf4k.toGameCollection
-
 val game = collection.games.first()
 val interpreter = Interpreter(game)
-val goban1 = interpreter.gobanFor(game.rootNode) // State of root node
-val goban2 = interpreter.gobanFor(game.rootNode.children.first()) // State of first child
+var goban = interpreter.gobanFor(game.rootNode) // State of root node
+goban = interpreter.gobanFor(game.rootNode.children.first()) // State of first child
 ```
