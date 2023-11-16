@@ -1,6 +1,8 @@
 package com.judas.sgf4k.feature.interpreter
 
 import com.judas.sgf4k.feature.parser.model.GameNode
+import com.judas.sgf4k.feature.parser.model.properties.SgfStandardPropertyKey.B
+import com.judas.sgf4k.feature.parser.model.properties.SgfStandardPropertyKey.W
 
 /**
  * Represents the state of the goban for a given game node.
@@ -56,6 +58,18 @@ data class Goban internal constructor(
             List(parentGoban.size) { i -> List(parentGoban.size) { j -> parentGoban.intersections[i][j] } }
         )
     }
+
+    /**
+     * Returns the specific intersections corresponding this Goban GameNode.
+     * If the Goban GameNode is a play node this is the played move intersection.
+     * If this is a pass move, or another type of node, the Intersection is null.
+     */
+    val currentIntersection: Intersection? =
+        (gameNode.getProperty(B) ?: gameNode.getProperty(W))
+            ?.values
+            ?.flatMap { it.toCoordinates() }
+            ?.map { intersections[it.first][it.second] }
+            ?.firstOrNull()
 }
 
 internal class MutableGoban(
