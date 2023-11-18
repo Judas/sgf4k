@@ -11,7 +11,7 @@ data class Intersection(
     internal fun adjacentIntersections() = mutableListOf(
         (column - 1) to row,
         (column + 1) to row,
-        column to (row + 1),
+        column to (row - 1),
         column to (row + 1)
     )
 }
